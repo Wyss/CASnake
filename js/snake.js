@@ -176,7 +176,7 @@ SNAKE.Snake = SNAKE.Snake || (function() {
         me.snakeHead = me.snakeBody["b0"];
         me.snakeTail = me.snakeBody["b0"];
         me.snakeHead.elm.className = me.snakeHead.elm.className.replace(/\bsnake-snakebody-dead\b/,'');
-        me.snakeHead.elm.className += " snake-snakebody-alive";
+        me.snakeHead.elm.className += " snake-snakebody-alive-vertical";
 
         // ----- private methods -----
 
@@ -219,7 +219,7 @@ SNAKE.Snake = SNAKE.Snake || (function() {
         function handleEndCondition(handleFunc) {
             recordScore();
             me.snakeHead.elm.style.zIndex = getNextHighestZIndex(me.snakeBody);
-            me.snakeHead.elm.className = me.snakeHead.elm.className.replace(/\bsnake-snakebody-alive\b/, '')
+            me.snakeHead.elm.className = me.snakeHead.elm.className.replace(/\bsnake-snakebody-alive-vertical\b/, '')
             me.snakeHead.elm.className += " snake-snakebody-dead";
 
             isDead = true;
@@ -325,6 +325,21 @@ SNAKE.Snake = SNAKE.Snake || (function() {
             newHead.xPos = oldHead.xPos + xPosShift[lastMove];
             newHead.yPos = oldHead.yPos + yPosShift[lastMove];
 
+            // Set the helix to horizontal or vertical depending on direction
+            newHead.elm.classList.remove("snake-snakebody-alive-horizontal");
+            newHead.elm.classList.remove("snake-snakebody-alive-vertical");
+            switch (currentDirection) {
+                case 0:
+                case 2:
+                    newHead.elm.className += " snake-snakebody-alive-vertical";
+                    break;
+                case 1:
+                case 3:
+                    newHead.elm.className += " snake-snakebody-alive-horizontal";
+                    break;
+            }
+
+
             if ( !newHead.elmStyle ) {
                 newHead.elmStyle = newHead.elm.style;
             }
@@ -369,11 +384,6 @@ SNAKE.Snake = SNAKE.Snake || (function() {
                 me.snakeBody[index] = blocks[ii];
                 me.snakeBody[index].prev = prevNode;
                 me.snakeBody[index].elm.className = me.snakeHead.elm.className.replace(/\bsnake-snakebody-dead\b/,'')
-                if (currentDirection == 1 || currentDirection == 3) {
-                    me.snakeBody[index].elm.className += " snake-snakebody-alive-horizontal";
-                } else {
-                    me.snakeBody[index].elm.className += " snake-snakebody-alive-vertical";
-                }
                 prevNode.next = me.snakeBody[index];
                 prevNode = me.snakeBody[index];
             }
@@ -441,12 +451,12 @@ SNAKE.Snake = SNAKE.Snake || (function() {
                 blocks[ii].elm.style.left = "-1000px";
                 blocks[ii].elm.style.top = "-1000px";
                 blocks[ii].elm.className = me.snakeHead.elm.className.replace(/\bsnake-snakebody-dead\b/,'')
-                blocks[ii].elm.className += " snake-snakebody-alive";
+                blocks[ii].elm.className += " snake-snakebody-alive-vertical";
             }
 
             blockPool.concat(blocks);
             me.snakeHead.elm.className = me.snakeHead.elm.className.replace(/\bsnake-snakebody-dead\b/,'')
-            me.snakeHead.elm.className += " snake-snakebody-alive";
+            me.snakeHead.elm.className += " snake-snakebody-alive-vertical";
             me.snakeHead.row = config.startRow || 1;
             me.snakeHead.col = config.startCol || 1;
             me.snakeHead.xPos = me.snakeHead.row * playingBoard.getBlockWidth();
