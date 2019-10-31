@@ -13,7 +13,7 @@ Source code is available here: https://github.com/patorjk/JavaScript-Snake
     <meta charset="utf-8">
     <title>JavaScript Snake</title>
 
-    <link rel=stylesheet id="style" type="text/css" href="./css/main-snake.css" />
+    <link rel=stylesheet id="style" type="text/css" href="./css/cas9-snake.css" />
 
     <style>
       .snake-toolbar {
@@ -42,11 +42,14 @@ function getTheme () {
         case 2: 
           changeTheme('css/dark-snake.css?' + Math.random());
           break;
-    case 3: 
+        case 3: 
           changeTheme('css/green-snake.css?' + Math.random());
           break;
+        case 4: 
+          changeTheme('css/cas9-snake.css?' + Math.random());
+          break;
         default:
-          changeTheme('css/main-snake.css?' + Math.random());
+          changeTheme('css/cas9-snake.css?' + Math.random());
           break;
     }
     setTimeout(function() {
@@ -73,9 +76,10 @@ if (navigator.onLine && window.location.hostname === 'patorjk.com') {
         <span>Theme:</span>
         <select onchange="getTheme()" id="select">
             <option>Light Theme by yokesharun</option>
-            <option selected>Main Theme by patorjk</option>
+            <option>Main Theme by patorjk</option>
             <option>Dark Theme by KenyStev</option>
             <option>Green Theme by CoffeeCatDE</option>
+            <option selected>Cas9 Theme by dpk9</option>
 
         </select>
       </div>
