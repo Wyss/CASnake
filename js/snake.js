@@ -138,7 +138,7 @@ SNAKE.Snake = SNAKE.Snake || (function() {
                 modeDropdown.addEventListener('change', function(evt) {
                     evt = evt || {};
                     var val = evt.target ? parseInt(evt.target.value) : 75;
-                    
+
                     if (isNaN(val)) {
                         val = 75;
                     } else if (val < 50) {
@@ -369,7 +369,11 @@ SNAKE.Snake = SNAKE.Snake || (function() {
                 me.snakeBody[index] = blocks[ii];
                 me.snakeBody[index].prev = prevNode;
                 me.snakeBody[index].elm.className = me.snakeHead.elm.className.replace(/\bsnake-snakebody-dead\b/,'')
-                me.snakeBody[index].elm.className += " snake-snakebody-alive";
+                if (currentDirection == 1 || currentDirection == 3) {
+                    me.snakeBody[index].elm.className += " snake-snakebody-alive-horizontal";
+                } else {
+                    me.snakeBody[index].elm.className += " snake-snakebody-alive-vertical";
+                }
                 prevNode.next = me.snakeBody[index];
                 prevNode = me.snakeBody[index];
             }
@@ -911,7 +915,7 @@ SNAKE.Board = SNAKE.Board || (function() {
                 cLeft = 0;
                 cWidth = getClientWidth()-20;
                 cHeight = getClientHeight()-20;
-                
+
             } else {
                 cTop = config.top;
                 cLeft = config.left;
@@ -1076,4 +1080,4 @@ SNAKE.Board = SNAKE.Board || (function() {
         }
 
     }; // end return function
-})();  
+})();

@@ -70,11 +70,14 @@ a.snake-link:hover {
     background-repeat: no-repeat;
 }
 
-.snake-snakebody-alive {
-   background-image: url('./images/helix-20x20.png');
+.snake-snakebody-alive-vertical {
+   background-image: url('./images/helix-vert-20x20.png');
+}
+.snake-snakebody-alive-horizontal {
+   background-image: url('./images/helix-hori-20x20.png');
 }
 .snake-snakebody-dead {
-   background-image: url('./images/dead-helix-20x20.png');
+   background-image: url('./images/helix-dead-rings-20x20.png');
 }
 
 .snake-food-block {
