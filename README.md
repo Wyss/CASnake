@@ -1,3 +1,12 @@
+# CASnake
+
+_*A Cas9 Simulator*_
+
+Modified by David Kalish for the Wyss Institute.  Original README below.
+
+
+
+
 JavaScript Snake<br/>
 By Patrick Gillespie<br/>
 License: MIT<br/>
