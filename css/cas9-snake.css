@@ -56,7 +56,7 @@ a.snake-link:hover {
     font-size: 14px;
     color: #ffffff;
     text-align: center;
-    background-color: #FFFFFF;
+    background-color: #000000;
     padding: 8px;
     margin: 0px;
 }
@@ -77,7 +77,7 @@ a.snake-link:hover {
    background-image: url('./images/helix-hori-20x20.png');
 }
 .snake-snakebody-dead {
-   background-image: url('./images/helix-dead-rings-20x20.png');
+   background-image: url('./images/helix-inverted-20x20.png');
 }
 
 .snake-food-block {
