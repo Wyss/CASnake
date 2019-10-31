@@ -2,10 +2,9 @@
 
 _*A Cas9 Simulator*_
 
-Modified by David Kalish for the Wyss Institute.  Original README below.
+Modified by David Kalish for the Wyss Institute.  
 
-
-
+### Original README: ###
 
 JavaScript Snake<br/>
 By Patrick Gillespie<br/>
