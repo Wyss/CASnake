@@ -83,9 +83,12 @@ a.snake-link:hover {
 .snake-food-block {
     margin: 0px;
     padding: 0px;
-    background-color: #FF0000;
-    border: 0px solid #000080;
+    border: 0px solid #CCCCCC;
+    height: 21px;
+    line-height: 21px;
     position: absolute;
+    text-align: center;
+    font-family: "Arial Black", Gadget, sans-serif;
 }
 
 .snake-playing-field {

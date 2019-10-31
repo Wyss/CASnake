@@ -573,6 +573,29 @@ SNAKE.Food = SNAKE.Food || (function() {
             fColumn = col;
             elmFood.style.top = row * playingBoard.getBlockHeight() + "px";
             elmFood.style.left = col * playingBoard.getBlockWidth() + "px";
+
+            var base_id = Math.floor(Math.random() * 4);
+            switch (base_id) {
+                case 0:
+                    elmFood.innerHTML = "A";
+                    elmFood.style.backgroundColor = "green";
+                    break;
+                case 1:
+                    elmFood.innerHTML = "C";
+                    elmFood.style.backgroundColor = "blue";
+                    break;
+
+                case 2:
+                    elmFood.innerHTML = "G";
+                    elmFood.style.backgroundColor = "orange";
+                    break;
+                case 4:
+                default:
+                    elmFood.innerHTML = "T";
+                    elmFood.style.backgroundColor = "red";
+                    break;
+            }
+
             return true;
         };
     };
