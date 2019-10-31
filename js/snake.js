@@ -662,7 +662,7 @@ SNAKE.Board = SNAKE.Board || (function() {
             myKeyListener,
             isPaused = false,//note: both the board and the snake can be paused
             // Board components
-            elmContainer, elmPlayingField, elmAboutPanel, elmLengthPanel, elmHighscorePanel, elmWelcome, elmTryAgain, elmWin, elmPauseScreen;
+            elmContainer, elmPlayingField, elmLengthPanel, elmHighscorePanel, elmWelcome, elmTryAgain, elmWin, elmPauseScreen;
 
         // --- public variables ---
         me.grid = [];
@@ -683,10 +683,6 @@ SNAKE.Board = SNAKE.Board || (function() {
             elmPauseScreen = document.createElement("div");
             elmPauseScreen.className = "snake-pause-screen";
             elmPauseScreen.innerHTML = "<div style='padding:10px;'>[Paused]<p/>Press [space] to unpause.</div>";
-
-            elmAboutPanel = document.createElement("div");
-            elmAboutPanel.className = "snake-panel-component";
-            elmAboutPanel.innerHTML = "<a href='http://patorjk.com/blog/software/' class='snake-link'>more patorjk.com apps</a> - <a href='https://github.com/patorjk/JavaScript-Snake' class='snake-link'>source code</a> - <a href='https://www.instagram.com/patorjk/' class='snake-link'>pat's instagram</a>";
 
             elmLengthPanel = document.createElement("div");
             elmLengthPanel.className = "snake-panel-component";
@@ -713,7 +709,6 @@ SNAKE.Board = SNAKE.Board || (function() {
             elmPauseScreen.style.zIndex = 10000;
             elmContainer.appendChild(elmPauseScreen);
             elmContainer.appendChild(elmPlayingField);
-            elmContainer.appendChild(elmAboutPanel);
             elmContainer.appendChild(elmLengthPanel);
             elmContainer.appendChild(elmHighscorePanel);
             elmContainer.appendChild(elmWelcome);
@@ -953,22 +948,11 @@ SNAKE.Board = SNAKE.Board || (function() {
             var bottomPanelHeight = hEdgeSpace - me.getBlockHeight();
             var pLabelTop = me.getBlockHeight() + fHeight + Math.round((bottomPanelHeight - 30)/2) + "px";
 
-            elmAboutPanel.style.top = pLabelTop;
-            elmAboutPanel.style.width = "450px";
-            elmAboutPanel.style.left = Math.round(cWidth/2) - Math.round(450/2) + "px";
-
             elmLengthPanel.style.top = pLabelTop;
             elmLengthPanel.style.left = 30 + "px";
 
             elmHighscorePanel.style.top = pLabelTop;
             elmHighscorePanel.style.left = cWidth - 140 + "px";
-
-            // if width is too narrow, hide the about panel
-            if (cWidth < 700) {
-                elmAboutPanel.style.display = "none";
-            } else {
-                elmAboutPanel.style.display = "block";
-            }
 
             me.grid = [];
             var numBoardCols = fWidth / me.getBlockWidth() + 2;
