@@ -11,9 +11,9 @@ Source code is available here: https://github.com/patorjk/JavaScript-Snake
 
 -->
     <meta charset="utf-8">
-    <title>CASnake</title>
+    <title>SyntheSnake</title>
 
-    <link rel=stylesheet id="style" type="text/css" href="./css/cas9-snake.css" />
+    <link rel=stylesheet id="style" type="text/css" href="./css/synth-snake.css" />
 
     <style>
       .snake-toolbar {
@@ -34,22 +34,10 @@ function getTheme () {
     var index = document.getElementById("select").selectedIndex;
     switch (index) {
         case 0:
-<!--          changeTheme('css/light-snake.css?' + Math.random());
-          break;
-        case 1:
-          changeTheme('css/main-snake.css?' + Math.random());
-          break;
-        case 2:
-          changeTheme('css/dark-snake.css?' + Math.random());
-          break;
-        case 3:
-          changeTheme('css/green-snake.css?' + Math.random());
-          break;
-        case 4:  -->
-          changeTheme('css/cas9-snake.css?' + Math.random());
+          changeTheme('css/synth-snake.css?' + Math.random());
           break;
         default:
-          changeTheme('css/cas9-snake.css?' + Math.random());
+          changeTheme('css/synth-snake.css?' + Math.random());
           break;
     }
     setTimeout(function() {
@@ -75,11 +63,7 @@ if (navigator.onLine && window.location.hostname === 'patorjk.com') {
       <div style="display:inline-block;margin-right:10px;">
         <span>Theme:</span>
         <select onchange="getTheme()" id="select">
- <!--           <option>Light Theme by yokesharun</option>
-            <option>Main Theme by patorjk</option>
-            <option>Dark Theme by KenyStev</option>
-            <option>Green Theme by CoffeeCatDE</option>  -->
-            <option selected>Cas9 Theme by dpk9</option>
+            <option selected>Synthesnake Theme by dpk9</option>
 
         </select>
       </div>
@@ -87,20 +71,12 @@ if (navigator.onLine && window.location.hostname === 'patorjk.com') {
         <span>Mode:</span>
         <select id="selectMode">
             <option value="100">Easy</option>
-            <option value="75" selected>Medium</option>
-            <option value="50">Hard</option>
+            <option value="75">Medium</option>
+            <option value="50" selected>Hard</option>
         </select>
       </div>
     </div>
 
-    <!--
-      <h2>Select which mode you would like to play in.</h2>
-      <button id="Easy">Easy</button><br />
-      <button id="Medium">Medium</button><br />
-      <button id="Difficult">Difficult</button>
-
-<button id="high-score">Get your current high score for this game.</button>
--->
     <div id="mode-wrapper" style="display: inline; width: auto;">
     </div>
 
