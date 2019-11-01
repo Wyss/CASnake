@@ -176,6 +176,7 @@ SNAKE.Snake = SNAKE.Snake || (function() {
         me.snakeHead = me.snakeBody["b0"];
         me.snakeTail = me.snakeBody["b0"];
         me.snakeHead.elm.className = me.snakeHead.elm.className.replace(/\bsnake-snakebody-dead\b/,'');
+        me.snakeHead.elm.innerHTML = "";
         me.snakeHead.elm.className += " snake-snakebody-alive-vertical";
 
         // ----- private methods -----
@@ -219,8 +220,7 @@ SNAKE.Snake = SNAKE.Snake || (function() {
         function handleEndCondition(handleFunc) {
             recordScore();
             me.snakeHead.elm.style.zIndex = getNextHighestZIndex(me.snakeBody);
-            me.snakeHead.elm.className = me.snakeHead.elm.className.replace(/\bsnake-snakebody-alive-vertical\b/, '')
-            me.snakeHead.elm.className += " snake-snakebody-dead";
+            me.snakeHead.elm.innerHTML = '<div class="snake-snakebody-dead-x1"></div><div class="snake-snakebody-dead-x2"></div>';
 
             isDead = true;
             handleFunc();
@@ -384,6 +384,7 @@ SNAKE.Snake = SNAKE.Snake || (function() {
                 me.snakeBody[index] = blocks[ii];
                 me.snakeBody[index].prev = prevNode;
                 me.snakeBody[index].elm.className = me.snakeHead.elm.className.replace(/\bsnake-snakebody-dead\b/,'')
+                me.snakeBody[index].elm.innerHTML = "";
                 prevNode.next = me.snakeBody[index];
                 prevNode = me.snakeBody[index];
             }
@@ -450,12 +451,14 @@ SNAKE.Snake = SNAKE.Snake || (function() {
             for (var ii = 0; ii < blocks.length; ii++) {
                 blocks[ii].elm.style.left = "-1000px";
                 blocks[ii].elm.style.top = "-1000px";
-                blocks[ii].elm.className = me.snakeHead.elm.className.replace(/\bsnake-snakebody-dead\b/,'')
+                blocks[ii].elm.className = me.snakeHead.elm.className.replace(/\bsnake-snakebody-dead\b/,'');
+                blocks[ii].elm.innerHTML = "";
                 blocks[ii].elm.className += " snake-snakebody-alive-vertical";
             }
 
             blockPool.concat(blocks);
             me.snakeHead.elm.className = me.snakeHead.elm.className.replace(/\bsnake-snakebody-dead\b/,'')
+            me.snakeHead.elm.innerHTML = "";
             me.snakeHead.elm.className += " snake-snakebody-alive-vertical";
             me.snakeHead.row = config.startRow || 1;
             me.snakeHead.col = config.startCol || 1;

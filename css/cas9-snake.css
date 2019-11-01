@@ -73,11 +73,35 @@ a.snake-link:hover {
 .snake-snakebody-alive-vertical {
    background-image: url('./images/helix-vert-20x20.png');
 }
+
 .snake-snakebody-alive-horizontal {
    background-image: url('./images/helix-hori-20x20.png');
 }
-.snake-snakebody-dead {
-   background-image: url('./images/helix-inverted-20x20.png');
+
+.snake-snakebody-dead-x1 {
+    width: 20px;
+    height: 20px;
+    border-bottom: 2px solid black;
+    -webkit-transform:
+        translateY(0px)
+        translateX(0px)
+        rotate(45deg);
+    position: relative;
+    top: -8px;
+    left: 7px
+}
+
+.snake-snakebody-dead-x2 {
+    width: 20px;
+    height: 20px;
+    border-bottom: 2px solid black;
+    -webkit-transform:
+        translateY(0px)
+        translateX(0px)
+        rotate(-45deg);
+    position: relative;
+    top: -30px;
+    left: -7px;
 }
 
 .snake-food-block {
