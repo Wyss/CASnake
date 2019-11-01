@@ -1,21 +1,21 @@
 {
-  "name": "javascript-snake",
+  "name": "synthesnake",
   "version": "1.0.0",
-  "description": "JavaScript Snake<br/> By Patrick Gillespie<br/> License: MIT<br/> http://patorjk.com/games/snake",
+  "description": "SyntheSnake<br/> By David Kalish<br/>Based heavily on JavaScript Snake<br/> By Patrick Gillespie<br/> License: MIT<br/> http://patorjk.com/games/snake",
   "main": "js/snake.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/patorjk/JavaScript-Snake.git"
+    "url": "git+https://github.com/Wyss/SyntheSnake.git"
   },
   "author": "",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/patorjk/JavaScript-Snake/issues"
+    "url": "https://github.com/Wyss/SyntheSnake/issues"
   },
-  "homepage": "https://github.com/patorjk/JavaScript-Snake#readme",
+  "homepage": "https://github.com/Wyss/SyntheSnake#readme",
   "devDependencies": {
     "webpack": "^4.41.1",
     "webpack-cli": "^3.3.9"

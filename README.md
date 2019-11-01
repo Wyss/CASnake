@@ -1,10 +1,10 @@
-# CASnake
+# SyntheSnake
 
-_*A Cas9 Simulator*_
+## A DNA Synthesis Simulator
 
-Modified by David Kalish for the Wyss Institute.  
+Modified by David Kalish for the Wyss Institute.
 
-### Original README: ###
+## Original README: ##
 
 JavaScript Snake<br/>
 By Patrick Gillespie<br/>
@@ -13,7 +13,7 @@ http://patorjk.com/games/snake
 
 This is a DOM-based game of Snake that I wrote in JavaScript a few years back.
 
-Other than the full screen mode demonstrated in the code, it can also be 
+Other than the full screen mode demonstrated in the code, it can also be
 initialized in div tags within a page. Example:
 
     var mySnakeBoard = new SNAKE.Board( {
@@ -22,6 +22,6 @@ initialized in div tags within a page. Example:
                                             width: 580,
                                             height:400
                                         });
-                                    
+
 The comments are formatted a little strange because at the time I was playing
 around with YUI Doc.
