@@ -763,7 +763,7 @@ SNAKE.Board = SNAKE.Board || (function() {
             if (config.fullScreen) {
                 fullScreenText = "<br>On Windows, press F11 to play in Full Screen mode.";
             }
-            welcomeTxt.innerHTML = "CASnake<p></p>Use the <strong>arrow keys</strong> on your keyboard to edit <strong>bases</strong> to your <strong>DNA strand</strong>. " + fullScreenText + "<p></p>";
+            welcomeTxt.innerHTML = "SyntheSnake<p></p>Use the <strong>arrow keys</strong> on your keyboard to edit <strong>bases</strong> to your <strong>DNA strand</strong>. " + fullScreenText + "<p></p>";
             var welcomeStart = document.createElement("button");
             welcomeStart.appendChild(document.createTextNode("Play Game"));
             var loadGame = function() {
@@ -794,7 +794,7 @@ SNAKE.Board = SNAKE.Board || (function() {
             tmpElm.className = elmClassName;
 
             var gameEndTxt = document.createElement("div");
-            gameEndTxt.innerHTML = "CASnake<p></p>" + message + "<p></p>";
+            gameEndTxt.innerHTML = "SyntheSnake<p></p>" + message + "<p></p>";
             var gameEndStart = document.createElement("button");
             gameEndStart.appendChild(document.createTextNode("Play Again?"));
 
@@ -822,7 +822,7 @@ SNAKE.Board = SNAKE.Board || (function() {
         }
 
         function createTryAgainElement() {
-            return createGameEndElement("You don't do Cas9 too good :(", "sbTryAgain", "snake-try-again-dialog");
+            return createGameEndElement("You don't do synthesize RNA too good :(", "sbTryAgain", "snake-try-again-dialog");
         }
 
         function createWinElement() {
