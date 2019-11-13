@@ -109,6 +109,7 @@ SNAKE.Snake = SNAKE.Snake || (function() {
 
         if (!config||!config.playingBoard) {return;}
         if (localStorage.jsSnakeHighScore === undefined) localStorage.setItem('jsSnakeHighScore', 0);
+        localStorage.setItem("eatenSeq", "");
 
         // ----- private variables -----
 
@@ -688,7 +689,7 @@ SNAKE.Board = SNAKE.Board || (function() {
             myKeyListener,
             isPaused = false,//note: both the board and the snake can be paused
             // Board components
-            elmContainer, elmPlayingField, elmLengthPanel, elmHighscorePanel, elmWelcome, elmTryAgain, elmWin, elmPauseScreen;
+            elmContainer, elmPlayingField, elmLengthPanel, elmHighscorePanel, elmWelcome, elmTryAgain, elmWin, elmPauseScreen, elmSeqPanel;
 
         // --- public variables ---
         me.grid = [];
@@ -718,6 +719,10 @@ SNAKE.Board = SNAKE.Board || (function() {
             elmHighscorePanel.className = "snake-panel-component";
             elmHighscorePanel.innerHTML = "Highscore: " + localStorage.jsSnakeHighScore;
 
+            elmSeqPanel = document.createElement("div");
+            elmSeqPanel.className = "snake-panel-component";
+            elmSeqPanel.innerHTML = "Sequence: ";
+
             elmWelcome = createWelcomeElement();
             elmTryAgain = createTryAgainElement();
             elmWin = createWinElement();
@@ -736,6 +741,7 @@ SNAKE.Board = SNAKE.Board || (function() {
             elmContainer.appendChild(elmPauseScreen);
             elmContainer.appendChild(elmPlayingField);
             elmContainer.appendChild(elmLengthPanel);
+            elmContainer.appendChild(elmSeqPanel);
             elmContainer.appendChild(elmHighscorePanel);
             elmContainer.appendChild(elmWelcome);
             elmContainer.appendChild(elmTryAgain);
@@ -863,6 +869,7 @@ SNAKE.Board = SNAKE.Board || (function() {
             SNAKE.removeEventListener(elmContainer, "keydown", myKeyListener, false);
             mySnake.reset();
             elmLengthPanel.innerHTML = "Length: 1";
+            elmSeqPanel.innerHTML = "Sequence: ";
             me.setupPlayingField();
         };
         /**
@@ -977,6 +984,11 @@ SNAKE.Board = SNAKE.Board || (function() {
             elmLengthPanel.style.top = pLabelTop;
             elmLengthPanel.style.left = 30 + "px";
 
+            lWidth = elmLengthPanel.offsetWidth;
+
+            elmSeqPanel.style.top = pLabelTop;
+            elmSeqPanel.style.left = lWidth + 60 + "px";
+
             elmHighscorePanel.style.top = pLabelTop;
             elmHighscorePanel.style.left = cWidth - 140 + "px";
 
@@ -1050,6 +1062,11 @@ SNAKE.Board = SNAKE.Board || (function() {
         */
         me.foodEaten = function() {
             elmLengthPanel.innerHTML = "Length: " + mySnake.snakeLength;
+            curSeq = localStorage.eatenSeq;
+            curBase = myFood.getFoodElement().innerHTML
+
+            localStorage.setItem("eatenSeq", curSeq.concat(curBase));
+            elmSeqPanel.innerHTML = "Sequence: " + localStorage.eatenSeq;
             if (mySnake.snakeLength > localStorage.jsSnakeHighScore)
             {
                 localStorage.setItem("jsSnakeHighScore", mySnake.snakeLength);
@@ -1066,6 +1083,7 @@ SNAKE.Board = SNAKE.Board || (function() {
         * @method handleDeath
         */
         me.handleDeath = function() {
+            localStorage.setItem("eatenSeq", "");
             handleEndCondition(elmTryAgain);
         };
 
