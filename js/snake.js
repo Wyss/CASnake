@@ -828,7 +828,7 @@ SNAKE.Board = SNAKE.Board || (function() {
         }
 
         function createTryAgainElement() {
-            return createGameEndElement("You don't synthesize RNA too good :(", "sbTryAgain", "snake-try-again-dialog");
+            return createGameEndElement("You don't synthesize DNA too good :(", "sbTryAgain", "snake-try-again-dialog");
         }
 
         function createWinElement() {
