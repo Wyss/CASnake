@@ -828,11 +828,11 @@ SNAKE.Board = SNAKE.Board || (function() {
         }
 
         function createTryAgainElement() {
-            return createGameEndElement("You don't synthesize DNA too good :(", "sbTryAgain", "snake-try-again-dialog");
+            return createGameEndElement("Your synthesis run failed :(", "sbTryAgain", "snake-try-again-dialog");
         }
 
         function createWinElement() {
-            return createGameEndElement("You win! :D", "sbWin", "snake-win-dialog");
+            return createGameEndElement("You win! :)", "sbWin", "snake-win-dialog");
         }
 
         function handleEndCondition(elmDialog) {
