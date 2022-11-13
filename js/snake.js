@@ -276,6 +276,7 @@ SNAKE.Snake = SNAKE.Snake || (function() {
                     directionFound = 2;
                     break;
             }
+            console.log("directionFound " + directionFound);
             if (currentDirection !== lastMove)  // Allow a queue of 1 premove so you can turn again before the first turn registers
             {
                 preMove = directionFound;
@@ -728,6 +729,33 @@ SNAKE.Board = SNAKE.Board || (function() {
             elmWin = createWinElement();
 
             SNAKE.addEventListener( elmContainer, "keyup", function(evt) {
+
+                // Checks any attached gamepads for button / axis presses and handles
+                // accordingly - BP
+                me.checkGamepads = function() {
+                    if (!me.gamepadsConnected) {
+                      return;
+                    }
+                    var p1_dir = null;
+                    var gamepads = navigator.getGamepads();
+                    if (gamepads[0]) {
+                        console.log("gamepad exists");
+                        if (gamepads[0].axes[0] < -0.2){p1_dir = 4} // left
+                        if (gamepads[0].axes[0] > 0.2){p1_dir = 8} // right
+                        if (gamepads[0].axes[1] < -0.2){p1_dir = 1} // up
+                        if (gamepads[0].axes[1] > 0.2){p1_dir = 2} // down
+                        if (gamepads[0].buttons[9].value) {
+                            if (me.gameplayMode == 8 || me.gameplayMode == 14) {
+                                me.newGame()
+                            }
+                        }
+                    }
+                    if (p1_dir != null) {
+                        me.actors[0].requestedDir = p1_dir;
+                    }
+                }
+
+
                 if (!evt) var evt = window.event;
                 evt.cancelBubble = true;
                 if (evt.stopPropagation) {evt.stopPropagation();}
@@ -1012,9 +1040,116 @@ SNAKE.Board = SNAKE.Board || (function() {
             myKeyListener = function(evt) {
                 if (!evt) var evt = window.event;
                 var keyNum = (evt.which) ? evt.which : evt.keyCode;
+                console.log("outer myKeyListener");
+
+                function handleDirections(keyNum) {
+                    console.log("handleDirections("+keyNum+")");
+
+                    //console.log(keyNum);
+                    if (keyNum === 32) {
+                        if(me.getBoardState()!=0)
+                            me.setPaused(!me.getPaused());
+                    }
+
+                    console.log("mySnake.HANDLEARROWKEYS: " + keyNum);
+                    mySnake.handleArrowKeys(keyNum);
+
+                    evt.cancelBubble = true;
+                    if (evt.stopPropagation) {evt.stopPropagation();}
+                    if (evt.preventDefault) {evt.preventDefault();}
+                    return false;
+                };
+
+                // Gamepads
+
+                function reportOnGamepad() {
+                    var gp = navigator.getGamepads()[0];
+                    var btn_num = null;
+                    var btn = null;
+                    var dir = null;
+
+                    for(var i=0;i<gp.buttons.length;i++) {
+                        if(gp.buttons[i].pressed) {
+                            btn_num = i;
+                        }
+                    }
+
+                    for(var i=0;i<gp.axes.length; i+=2) {
+                        if (gp.axes[i] < -0.5) {
+                            dir = "LEFT";
+                            keyNum = 37;
+                        }
+                        if (gp.axes[i] >  0.5) {
+                            dir = "RIGHT";
+                            keyNum = 39;
+                        }
+                        if (gp.axes[i+1] < -0.5) {
+                            dir = "UP";
+                            keyNum = 38;
+                        }
+                        if (gp.axes[i+1] >  0.5) {
+                            dir = "DOWN";
+                            keyNum = 40;
+                        }
+                    }
+
+                    switch (btn_num) {
+                    case 0:
+                        btn = "X"
+                        break;
+                    case 1:
+                        btn = "A"
+                        break;
+                    case 2:
+                        btn = "B"
+                        break;
+                    case 3:
+                        btn = "Y"
+                        break;
+                    case 4:
+                        btn = "L"
+                        break;
+                    case 5:
+                        btn = "R"
+                        break;
+                    case 8:
+                        btn = "SELECT"
+                        break;
+                    case 9:
+                        btn = "START"
+                        break;
+                    }
+                    // console.log(dir);
+                    // console.log(btn);
+                    console.log("keyNum: " + keyNum);
+
+                    handleDirections(keyNum);
+
+                    if (btn == "START") {
+                        if(me.getBoardState()!=0)
+                            me.setPaused(!me.getPaused());
+                    }
+
+                    return keyNum;
+                }
+
+                if (!navigator.getGamepads()[0]) {
+                    // console.log("no gamepad?");
+                    me.gamepadsConnected = false;
+                    window.addEventListener("gamepadconnected", function(e) {
+                        me.gamepadsConnected = true;
+                        // console.log("gamepad connected 1");
+                        keyNum = window.setInterval(reportOnGamepad,100);
+                    });
+                } else {
+                    me.gamepadsConnected = true;
+                    // console.log("gamepad connected 2");
+                }
 
                 if (me.getBoardState() === 1) {
-                    if ( !(keyNum >= 37 && keyNum <= 40) && !(keyNum === 87 || keyNum === 65 || keyNum === 83 || keyNum === 68)) {return;} // if not an arrow key, leave
+                    if ( !(keyNum >= 37 && keyNum <= 40) && !(keyNum === 87 || keyNum === 65 || keyNum === 83 || keyNum === 68)) {
+                        return;
+                    } // if not an arrow key, leave
 
                     // This removes the listener added at the #listenerX line
                     SNAKE.removeEventListener(elmContainer, "keydown", myKeyListener, false);
@@ -1022,23 +1157,12 @@ SNAKE.Board = SNAKE.Board || (function() {
                     myKeyListener = function(evt) {
                         if (!evt) var evt = window.event;
                         var keyNum = (evt.which) ? evt.which : evt.keyCode;
-
-                        //console.log(keyNum);
-                        if (keyNum === 32) {
-							if(me.getBoardState()!=0)
-                                me.setPaused(!me.getPaused());
-                        }
-
-                        mySnake.handleArrowKeys(keyNum);
-
-                        evt.cancelBubble = true;
-                        if (evt.stopPropagation) {evt.stopPropagation();}
-                        if (evt.preventDefault) {evt.preventDefault();}
-                        return false;
+                        handleDirections(keyNum);
                     };
                     SNAKE.addEventListener( elmContainer, "keydown", myKeyListener, false);
 
                     mySnake.rebirth();
+                    console.log("HANDLEARROWKEYS: " + keyNum);
                     mySnake.handleArrowKeys(keyNum);
                     me.setBoardState(2); // start the game!
                     mySnake.go();
