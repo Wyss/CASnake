@@ -25,3 +25,7 @@ initialized in div tags within a page. Example:
 
 The comments are formatted a little strange because at the time I was playing
 around with YUI Doc.
+
+For gamepad support, install AntiMicroX and run while playing game.
+For SNES style controller (iBuffalo Classic USB Gamepad, BSDP801), load
+config ```antimicrox_snes_config.gamecontroller.amgp```
